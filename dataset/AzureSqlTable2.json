@@ -1,0 +1,198 @@
+{
+	"name": "AzureSqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DfReportInboundB2cDetailsId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DfReportInboundB2cFileId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Mese",
+				"type": "varchar"
+			},
+			{
+				"name": "GiornoSettimana",
+				"type": "varchar"
+			},
+			{
+				"name": "Servizio",
+				"type": "varchar"
+			},
+			{
+				"name": "Giorno",
+				"type": "date"
+			},
+			{
+				"name": "Campagna",
+				"type": "varchar"
+			},
+			{
+				"name": "FasciaOraria",
+				"type": "varchar"
+			},
+			{
+				"name": "NumeroChiamante",
+				"type": "varchar"
+			},
+			{
+				"name": "Settimana",
+				"type": "varchar"
+			},
+			{
+				"name": "Offerte",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Completate",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Servite",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ServiteCompletate",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ServiteSubito",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_0_10",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_10_20",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_20_30",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_30_40",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_40_50",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_50_60",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_60_120",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_120_180",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_180_240",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Accodate_Oltre_240",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CompletateAbbandonataInCoda",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_0_10",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_10_20",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_20_30",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_30_40",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_40_50",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_50_60",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_60_120",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_120_180",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AbbInCoda_180_240",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TempoDiCodaSecs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TempoDiConversazioneChiamata",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DfReportInboundB2cDetails"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
