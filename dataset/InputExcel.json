@@ -5,11 +5,6 @@
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"NomeFileExcel": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
