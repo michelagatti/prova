@@ -25,53 +25,6 @@
 						"computeType": "General"
 					}
 				}
-			},
-			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "importazione//Report Inbound_SisalPay B2C Small.xlsx"
-					},
-					{
-						"name": "Destination",
-						"value": "dbo.DfReportInboundB2cDetails"
-					}
-				],
-				"typeProperties": {
-					"source": {
-						"type": "ExcelSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
-						}
-					},
-					"sink": {
-						"type": "AzureSqlSink"
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "InputExcel",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureSqlTable2",
-						"type": "DatasetReference"
-					}
-				]
 			}
 		],
 		"annotations": [],
