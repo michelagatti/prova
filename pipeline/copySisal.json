@@ -160,18 +160,6 @@
 									"type": "Int32",
 									"physicalType": "int"
 								}
-							},
-							{
-								"source": {
-									"name": "Servite",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "ServiteCompletate",
-									"type": "Int32",
-									"physicalType": "int"
-								}
 							}
 						],
 						"typeConversion": true,
