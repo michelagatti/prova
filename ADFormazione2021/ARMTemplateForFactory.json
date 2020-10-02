@@ -182,18 +182,6 @@
 									},
 									{
 										"source": {
-											"name": "Giorno",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Giorno",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
 											"name": "Campagna di uscita Chiamata",
 											"type": "String",
 											"physicalType": "String"
