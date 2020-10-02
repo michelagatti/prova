@@ -1,0 +1,200 @@
+{
+	"name": "copySisal",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mese dell'anno",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Mese",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Giorno della settimana",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GiornoSettimana",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Servizio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Servizio",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Giorno",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Giorno",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Campagna di uscita Chiamata",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Campagna",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Fascia 60'",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FasciaOraria",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Numero chiamante",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NumeroChiamante",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Settimana",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Settimana",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Offerte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Offerte",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Completate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Completate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Servite",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Servite",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Servite",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ServiteCompletate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "InputExcel",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
