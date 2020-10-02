@@ -5,6 +5,11 @@
 			"referenceName": "AzureSqlDatabase2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"servername": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
