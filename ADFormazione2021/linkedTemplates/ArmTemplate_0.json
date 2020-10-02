@@ -337,6 +337,177 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InputExcel')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Base Dati",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Report Inbound_SisalPay B2C Small.xlsx",
+						"container": "importazione"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Mese dell'anno",
+						"type": "String"
+					},
+					{
+						"name": "Giorno della settimana",
+						"type": "String"
+					},
+					{
+						"name": "Servizio",
+						"type": "String"
+					},
+					{
+						"name": "Giorno",
+						"type": "String"
+					},
+					{
+						"name": "Campagna di uscita Chiamata",
+						"type": "String"
+					},
+					{
+						"name": "Fascia 60'",
+						"type": "String"
+					},
+					{
+						"name": "Numero chiamante",
+						"type": "String"
+					},
+					{
+						"name": "Settimana",
+						"type": "String"
+					},
+					{
+						"name": "Offerte",
+						"type": "String"
+					},
+					{
+						"name": "Completate",
+						"type": "String"
+					},
+					{
+						"name": "Servite",
+						"type": "String"
+					},
+					{
+						"name": "Servite e Completate",
+						"type": "String"
+					},
+					{
+						"name": "Servite Subito",
+						"type": "String"
+					},
+					{
+						"name": "Accodate",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 0-10",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 10-20",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 20-30",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 30-40",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 40-50",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 50-60",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 60-120",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 120-180",
+						"type": "String"
+					},
+					{
+						"name": "Accodate 180-240",
+						"type": "String"
+					},
+					{
+						"name": "Accodate oltre 240",
+						"type": "String"
+					},
+					{
+						"name": "Completate (abbandonata) in coda",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 0-10",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 10-20",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 20-30",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 30-40",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 40-50",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 50-60",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 60-120",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 120-180",
+						"type": "String"
+					},
+					{
+						"name": "Abb. in coda 180-240",
+						"type": "String"
+					},
+					{
+						"name": "Tempo di coda Secs",
+						"type": "String"
+					},
+					{
+						"name": "Tempo di conversazione Chiamata",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dataflow2')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -439,13 +610,64 @@
 								"computeType": "General"
 							}
 						}
+					},
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "importazione//Report Inbound_SisalPay B2C Small.xlsx"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.DfReportInboundB2cDetails"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "InputExcel",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": [],
 				"lastPublishTime": "2020-09-19T12:53:29Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow2')]"
+				"[concat(variables('factoryId'), '/dataflows/dataflow2')]",
+				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
 			]
 		},
 		{
