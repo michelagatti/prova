@@ -116,6 +116,430 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/copySisal')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Mese dell'anno",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Mese",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Giorno della settimana",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "GiornoSettimana",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Servizio",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Servizio",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Settimana",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Settimana",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Offerte",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Offerte",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Completate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Completate",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Servite",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Servite",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Servite e Completate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ServiteCompletate",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Servite Subito",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ServiteSubito",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 0-10",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_0_10",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 10-20",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_10_20",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 20-30",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_20_30",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 30-40",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_30_40",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 40-50",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_40_50",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 50-60",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_50_60",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 60-120",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_60_120",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 120-180",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_120_180",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate 180-240",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_180_240",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Accodate oltre 240",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Accodate_Oltre_240",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Completate (abbandonata) in coda",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CompletateAbbandonataInCoda",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 0-10",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_0_10",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 10-20",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_10_20",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 20-30",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_20_30",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 30-40",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_30_40",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 40-50",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_40_50",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 50-60",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_50_60",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 60-120",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_60_120",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 120-180",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_120_180",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Abb. in coda 180-240",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AbbInCoda_180_240",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "InputExcel",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -747,466 +1171,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/copySisal')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "ExcelSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Mese dell'anno",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Mese",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Giorno della settimana",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "GiornoSettimana",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Servizio",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Servizio",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Campagna di uscita Chiamata",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Campagna",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Fascia 60'",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "FasciaOraria",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Numero chiamante",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "NumeroChiamante",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Settimana",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Settimana",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Offerte",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Offerte",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Completate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Completate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Servite",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite e Completate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ServiteCompletate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite Subito",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ServiteSubito",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 0-10",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_0_10",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 10-20",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_10_20",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 20-30",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_20_30",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 30-40",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_30_40",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 40-50",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_40_50",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 50-60",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_50_60",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 60-120",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_60_120",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 120-180",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_120_180",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 180-240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_180_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate oltre 240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_Oltre_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Completate (abbandonata) in coda",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CompletateAbbandonataInCoda",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 0-10",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_0_10",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 10-20",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_10_20",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 20-30",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_20_30",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 30-40",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_30_40",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 40-50",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_40_50",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 50-60",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_50_60",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 60-120",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_60_120",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 120-180",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_120_180",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 180-240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_180_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "InputExcel",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AzureSqlTable2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
 			]
 		}
 	]
