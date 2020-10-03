@@ -30,11 +30,20 @@
 						"type": "TabularTranslator",
 						"mappings": [
 							{
-								"source": {
-									"name": "Mese dell'anno",
-									"type": "String",
-									"physicalType": "String"
-								},
+								"sink": {
+									"name": "DfReportInboundB2cDetailsId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"sink": {
+									"name": "DfReportInboundB2cFileId",
+									"type": "Guid",
+									"physicalType": "uniqueidentifier"
+								}
+							},
+							{
 								"sink": {
 									"name": "Mese",
 									"type": "String",
@@ -42,11 +51,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Giorno della settimana",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "GiornoSettimana",
 									"type": "String",
@@ -67,10 +71,17 @@
 							},
 							{
 								"source": {
-									"name": "Campagna di uscita Chiamata",
+									"name": "Giorno",
 									"type": "String",
 									"physicalType": "String"
 								},
+								"sink": {
+									"name": "Giorno",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
 								"sink": {
 									"name": "Campagna",
 									"type": "String",
@@ -78,11 +89,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Fascia 60'",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "FasciaOraria",
 									"type": "String",
@@ -90,11 +96,6 @@
 								}
 							},
 							{
-								"source": {
-									"name": "Numero chiamante",
-									"type": "String",
-									"physicalType": "String"
-								},
 								"sink": {
 									"name": "NumeroChiamante",
 									"type": "String",
@@ -147,6 +148,186 @@
 									"name": "Servite",
 									"type": "Int32",
 									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "ServiteCompletate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "ServiteSubito",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_0_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_10_20",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_20_30",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_30_40",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_40_50",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_50_60",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_60_120",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_120_180",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_180_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "Accodate_Oltre_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "CompletateAbbandonataInCoda",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_0_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_10_20",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_20_30",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_30_40",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_40_50",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_50_60",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_60_120",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_120_180",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "AbbInCoda_180_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "TempoDiCodaSecs",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"sink": {
+									"name": "TempoDiConversazioneChiamata",
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
