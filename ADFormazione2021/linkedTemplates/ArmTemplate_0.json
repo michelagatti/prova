@@ -18,6 +18,10 @@
 		"AzureSqlDatabase2_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
 		}
 	},
 	"variables": {
@@ -59,6 +63,19 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -508,6 +525,37 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Settimana')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "settimana",
+						"type": "varchar"
+					},
+					{
+						"name": "id",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "settimana"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/copySisal')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -534,7 +582,7 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink"
+								"type": "SqlServerSink"
 							},
 							"enableStaging": false,
 							"translator": {
@@ -542,122 +590,12 @@
 								"mappings": [
 									{
 										"source": {
-											"name": "Mese dell'anno",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Mese",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Giorno della settimana",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "GiornoSettimana",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Servizio",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Servizio",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Campagna di uscita Chiamata",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Campagna",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Fascia 60'",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "FasciaOraria",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Numero chiamante",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "NumeroChiamante",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
 											"name": "Settimana",
 											"type": "String",
 											"physicalType": "String"
 										},
 										"sink": {
-											"name": "Settimana",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Offerte",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Offerte",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Completate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Completate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Servite",
-											"type": "Int32",
-											"physicalType": "int"
+											"name": "settimana"
 										}
 									}
 								],
@@ -677,7 +615,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "AzureSqlTable2",
+								"referenceName": "Settimana",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -688,7 +626,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
+				"[concat(variables('factoryId'), '/datasets/Settimana')]"
 			]
 		},
 		{
