@@ -1177,18 +1177,6 @@
 											"type": "Int32",
 											"physicalType": "int"
 										}
-									},
-									{
-										"source": {
-											"name": "Tempo di coda Secs",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "TempoDiCodaSecs",
-											"type": "Int32",
-											"physicalType": "int"
-										}
 									}
 								],
 								"typeConversion": true,
