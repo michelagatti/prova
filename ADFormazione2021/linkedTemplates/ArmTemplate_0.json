@@ -556,6 +556,74 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/dataflow2')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable2",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\t{Mese dell'anno} as string,\n\t\t{Giorno della settimana} as string,\n\t\tServizio as string,\n\t\tGiorno as string,\n\t\t{Campagna di uscita Chiamata} as string,\n\t\t{Fascia 60'} as string,\n\t\t{Numero chiamante} as string,\n\t\tSettimana as string,\n\t\tOfferte as string,\n\t\tCompletate as string,\n\t\tServite as string,\n\t\t{Servite e Completate} as string,\n\t\t{Servite Subito} as string,\n\t\tAccodate as string,\n\t\t{Accodate 0-10} as string,\n\t\t{Accodate 10-20} as string,\n\t\t{Accodate 20-30} as string,\n\t\t{Accodate 30-40} as string,\n\t\t{Accodate 40-50} as string,\n\t\t{Accodate 50-60} as string,\n\t\t{Accodate 60-120} as string,\n\t\t{Accodate 120-180} as string,\n\t\t{Accodate 180-240} as string,\n\t\t{Accodate oltre 240} as string,\n\t\t{Completate (abbandonata) in coda} as string,\n\t\t{Abb. in coda 0-10} as string,\n\t\t{Abb. in coda 10-20} as string,\n\t\t{Abb. in coda 20-30} as string,\n\t\t{Abb. in coda 30-40} as string,\n\t\t{Abb. in coda 40-50} as string,\n\t\t{Abb. in coda 50-60} as string,\n\t\t{Abb. in coda 60-120} as string,\n\t\t{Abb. in coda 120-180} as string,\n\t\t{Abb. in coda 180-240} as string,\n\t\t{Tempo di coda Secs} as string,\n\t\t{Tempo di conversazione Chiamata} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false,\n\tlimit: 100,\n\tmoveFiles: ['SampleSisal.xlsx',(concat('FileSisal',toString(currentDate('UTC')), '.xls'))],\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'Report Inbound_SisalPay B2C.xlsx',\n\tsheetName: 'Base Dati',\n\tfirstRowAsHeader: true,\n\tdateFormats: ['MM/dd/yyyy'],\n\tpreferredIntegralType: 'long') ~> source1\nsource1 sink(input(\n\t\tDfReportInboundB2cDetailsId as long,\n\t\tDfReportInboundB2cFileId as string,\n\t\tMese as string,\n\t\tGiornoSettimana as string,\n\t\tServizio as string,\n\t\tGiorno as date,\n\t\tCampagna as string,\n\t\tFasciaOraria as string,\n\t\tNumeroChiamante as string,\n\t\tSettimana as string,\n\t\tOfferte as integer,\n\t\tCompletate as integer,\n\t\tServite as integer,\n\t\tServiteCompletate as integer,\n\t\tServiteSubito as integer,\n\t\tAccodate as integer,\n\t\tAccodate_0_10 as integer,\n\t\tAccodate_10_20 as integer,\n\t\tAccodate_20_30 as integer,\n\t\tAccodate_30_40 as integer,\n\t\tAccodate_40_50 as integer,\n\t\tAccodate_50_60 as integer,\n\t\tAccodate_60_120 as integer,\n\t\tAccodate_120_180 as integer,\n\t\tAccodate_180_240 as integer,\n\t\tAccodate_Oltre_240 as integer,\n\t\tCompletateAbbandonataInCoda as integer,\n\t\tAbbInCoda_0_10 as integer,\n\t\tAbbInCoda_10_20 as integer,\n\t\tAbbInCoda_20_30 as integer,\n\t\tAbbInCoda_30_40 as integer,\n\t\tAbbInCoda_40_50 as integer,\n\t\tAbbInCoda_50_60 as integer,\n\t\tAbbInCoda_60_120 as integer,\n\t\tAbbInCoda_120_180 as integer,\n\t\tAbbInCoda_180_240 as integer,\n\t\tTempoDiCodaSecs as integer,\n\t\tTempoDiConversazioneChiamata as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tMese = {Mese dell'anno},\n\t\tGiornoSettimana = {Giorno della settimana},\n\t\tServizio,\n\t\tGiorno,\n\t\tCampagna = {Campagna di uscita Chiamata},\n\t\tFasciaOraria = {Fascia 60'},\n\t\tNumeroChiamante = {Numero chiamante},\n\t\tSettimana,\n\t\tOfferte,\n\t\tCompletate,\n\t\tServite,\n\t\tServiteCompletate = {Servite e Completate},\n\t\tServiteSubito = {Servite Subito},\n\t\tAccodate,\n\t\tAccodate_0_10 = {Accodate 0-10},\n\t\tAccodate_10_20 = {Accodate 10-20},\n\t\tAccodate_20_30 = {Accodate 20-30},\n\t\tAccodate_30_40 = {Accodate 30-40},\n\t\tAccodate_40_50 = {Accodate 40-50},\n\t\tAccodate_50_60 = {Accodate 50-60},\n\t\tAccodate_60_120 = {Accodate 60-120},\n\t\tAccodate_120_180 = {Accodate 120-180},\n\t\tAccodate_180_240 = {Accodate 180-240},\n\t\tAccodate_Oltre_240 = {Accodate oltre 240},\n\t\tCompletateAbbandonataInCoda = {Completate (abbandonata) in coda},\n\t\tAbbInCoda_0_10 = {Abb. in coda 0-10},\n\t\tAbbInCoda_10_20 = {Abb. in coda 10-20},\n\t\tAbbInCoda_20_30 = {Abb. in coda 20-30},\n\t\tAbbInCoda_30_40 = {Abb. in coda 30-40},\n\t\tAbbInCoda_40_50 = {Abb. in coda 40-50},\n\t\tAbbInCoda_50_60 = {Abb. in coda 50-60},\n\t\tAbbInCoda_60_120 = {Abb. in coda 60-120},\n\t\tAbbInCoda_120_180 = {Abb. in coda 120-180},\n\t\tAbbInCoda_180_240 = {Abb. in coda 180-240},\n\t\tTempoDiCodaSecs = {Tempo di coda Secs},\n\t\tTempoDiConversazioneChiamata = {Tempo di coda Secs}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"script": "source(output(\n\t\tstringa as string,\n\t\tintero as short,\n\t\tformula as string,\n\t\tfloat as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'provaExcel.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nsource1 sink(input(\n\t\tcampoStringa as string,\n\t\tcampoIntero as short,\n\t\tcampoFormula as string,\n\t\tcampoNumericoconFormula as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tcampoStringa = stringa,\n\t\tcampoIntero = intero,\n\t\tcampoFormula = formula,\n\t\tcampoNumericoconFormula = float\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/copySisal')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -623,390 +691,6 @@
 											"type": "String",
 											"physicalType": "varchar"
 										}
-									},
-									{
-										"source": {
-											"name": "Campagna di uscita Chiamata",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Campagna",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Fascia 60'",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "FasciaOraria",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Numero chiamante",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "NumeroChiamante",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Settimana",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Settimana",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Offerte",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Offerte",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Completate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Completate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Servite",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite e Completate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ServiteCompletate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Servite Subito",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "ServiteSubito",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 0-10",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_0_10",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 10-20",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_10_20",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 20-30",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_20_30",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 30-40",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_30_40",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 40-50",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_40_50",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 50-60",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_50_60",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 60-120",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_60_120",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 120-180",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_120_180",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate 180-240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_180_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Accodate oltre 240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "Accodate_Oltre_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Completate (abbandonata) in coda",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "CompletateAbbandonataInCoda",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 0-10",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_0_10",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 10-20",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_10_20",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 20-30",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_20_30",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 30-40",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_30_40",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 40-50",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_40_50",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 50-60",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_50_60",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 60-120",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_60_120",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 120-180",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_120_180",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Abb. in coda 180-240",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "AbbInCoda_180_240",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo di coda Secs",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "TempoDiCodaSecs",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "Tempo di conversazione Chiamata",
-											"type": "String",
-											"physicalType": "String"
-										},
-										"sink": {
-											"name": "TempoDiConversazioneChiamata",
-											"type": "String",
-											"physicalType": "varchar"
-										}
 									}
 								],
 								"typeConversion": true,
@@ -1037,74 +721,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataflow2')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"linkedService": {
-								"referenceName": "AzureBlobStorage1",
-								"type": "LinkedServiceReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable2",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [],
-					"script": "source(output(\n\t\t{Mese dell'anno} as string,\n\t\t{Giorno della settimana} as string,\n\t\tServizio as string,\n\t\tGiorno as string,\n\t\t{Campagna di uscita Chiamata} as string,\n\t\t{Fascia 60'} as string,\n\t\t{Numero chiamante} as string,\n\t\tSettimana as string,\n\t\tOfferte as string,\n\t\tCompletate as string,\n\t\tServite as string,\n\t\t{Servite e Completate} as string,\n\t\t{Servite Subito} as string,\n\t\tAccodate as string,\n\t\t{Accodate 0-10} as string,\n\t\t{Accodate 10-20} as string,\n\t\t{Accodate 20-30} as string,\n\t\t{Accodate 30-40} as string,\n\t\t{Accodate 40-50} as string,\n\t\t{Accodate 50-60} as string,\n\t\t{Accodate 60-120} as string,\n\t\t{Accodate 120-180} as string,\n\t\t{Accodate 180-240} as string,\n\t\t{Accodate oltre 240} as string,\n\t\t{Completate (abbandonata) in coda} as string,\n\t\t{Abb. in coda 0-10} as string,\n\t\t{Abb. in coda 10-20} as string,\n\t\t{Abb. in coda 20-30} as string,\n\t\t{Abb. in coda 30-40} as string,\n\t\t{Abb. in coda 40-50} as string,\n\t\t{Abb. in coda 50-60} as string,\n\t\t{Abb. in coda 60-120} as string,\n\t\t{Abb. in coda 120-180} as string,\n\t\t{Abb. in coda 180-240} as string,\n\t\t{Tempo di coda Secs} as string,\n\t\t{Tempo di conversazione Chiamata} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false,\n\tlimit: 100,\n\tmoveFiles: ['SampleSisal.xlsx',(concat('FileSisal',toString(currentDate('UTC')), '.xls'))],\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'Report Inbound_SisalPay B2C.xlsx',\n\tsheetName: 'Base Dati',\n\tfirstRowAsHeader: true,\n\tdateFormats: ['MM/dd/yyyy'],\n\tpreferredIntegralType: 'long') ~> source1\nsource1 sink(input(\n\t\tDfReportInboundB2cDetailsId as long,\n\t\tDfReportInboundB2cFileId as string,\n\t\tMese as string,\n\t\tGiornoSettimana as string,\n\t\tServizio as string,\n\t\tGiorno as date,\n\t\tCampagna as string,\n\t\tFasciaOraria as string,\n\t\tNumeroChiamante as string,\n\t\tSettimana as string,\n\t\tOfferte as integer,\n\t\tCompletate as integer,\n\t\tServite as integer,\n\t\tServiteCompletate as integer,\n\t\tServiteSubito as integer,\n\t\tAccodate as integer,\n\t\tAccodate_0_10 as integer,\n\t\tAccodate_10_20 as integer,\n\t\tAccodate_20_30 as integer,\n\t\tAccodate_30_40 as integer,\n\t\tAccodate_40_50 as integer,\n\t\tAccodate_50_60 as integer,\n\t\tAccodate_60_120 as integer,\n\t\tAccodate_120_180 as integer,\n\t\tAccodate_180_240 as integer,\n\t\tAccodate_Oltre_240 as integer,\n\t\tCompletateAbbandonataInCoda as integer,\n\t\tAbbInCoda_0_10 as integer,\n\t\tAbbInCoda_10_20 as integer,\n\t\tAbbInCoda_20_30 as integer,\n\t\tAbbInCoda_30_40 as integer,\n\t\tAbbInCoda_40_50 as integer,\n\t\tAbbInCoda_50_60 as integer,\n\t\tAbbInCoda_60_120 as integer,\n\t\tAbbInCoda_120_180 as integer,\n\t\tAbbInCoda_180_240 as integer,\n\t\tTempoDiCodaSecs as integer,\n\t\tTempoDiConversazioneChiamata as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tMese = {Mese dell'anno},\n\t\tGiornoSettimana = {Giorno della settimana},\n\t\tServizio,\n\t\tGiorno,\n\t\tCampagna = {Campagna di uscita Chiamata},\n\t\tFasciaOraria = {Fascia 60'},\n\t\tNumeroChiamante = {Numero chiamante},\n\t\tSettimana,\n\t\tOfferte,\n\t\tCompletate,\n\t\tServite,\n\t\tServiteCompletate = {Servite e Completate},\n\t\tServiteSubito = {Servite Subito},\n\t\tAccodate,\n\t\tAccodate_0_10 = {Accodate 0-10},\n\t\tAccodate_10_20 = {Accodate 10-20},\n\t\tAccodate_20_30 = {Accodate 20-30},\n\t\tAccodate_30_40 = {Accodate 30-40},\n\t\tAccodate_40_50 = {Accodate 40-50},\n\t\tAccodate_50_60 = {Accodate 50-60},\n\t\tAccodate_60_120 = {Accodate 60-120},\n\t\tAccodate_120_180 = {Accodate 120-180},\n\t\tAccodate_180_240 = {Accodate 180-240},\n\t\tAccodate_Oltre_240 = {Accodate oltre 240},\n\t\tCompletateAbbandonataInCoda = {Completate (abbandonata) in coda},\n\t\tAbbInCoda_0_10 = {Abb. in coda 0-10},\n\t\tAbbInCoda_10_20 = {Abb. in coda 10-20},\n\t\tAbbInCoda_20_30 = {Abb. in coda 20-30},\n\t\tAbbInCoda_30_40 = {Abb. in coda 30-40},\n\t\tAbbInCoda_40_50 = {Abb. in coda 40-50},\n\t\tAbbInCoda_50_60 = {Abb. in coda 50-60},\n\t\tAbbInCoda_60_120 = {Abb. in coda 60-120},\n\t\tAbbInCoda_120_180 = {Abb. in coda 120-180},\n\t\tAbbInCoda_180_240 = {Abb. in coda 180-240},\n\t\tTempoDiCodaSecs = {Tempo di coda Secs},\n\t\tTempoDiConversazioneChiamata = {Tempo di coda Secs}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataflow3')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"linkedService": {
-								"referenceName": "AzureBlobStorage1",
-								"type": "LinkedServiceReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable1",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [],
-					"script": "source(output(\n\t\tstringa as string,\n\t\tintero as short,\n\t\tformula as string,\n\t\tfloat as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'provaExcel.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nsource1 sink(input(\n\t\tcampoStringa as string,\n\t\tcampoIntero as short,\n\t\tcampoFormula as string,\n\t\tcampoNumericoconFormula as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tcampoStringa = stringa,\n\t\tcampoIntero = intero,\n\t\tcampoFormula = formula,\n\t\tcampoNumericoconFormula = float\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
 			]
 		},
 		{
