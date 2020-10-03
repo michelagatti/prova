@@ -67,42 +67,6 @@
 							},
 							{
 								"source": {
-									"name": "Campagna di uscita Chiamata",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "Campagna",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "Fascia 60'",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "FasciaOraria",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "Numero chiamante",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "NumeroChiamante",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
 									"name": "Settimana",
 									"type": "String",
 									"physicalType": "String"
