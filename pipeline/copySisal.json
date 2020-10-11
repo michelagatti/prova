@@ -438,16 +438,8 @@
 						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
 					},
 					"body": {
-						"ApplicationName": "Microsys.EAI",
-						"FlowGroup": "INT_DATAFACTORY",
-						"FlowInstanceId": "string",
-						"FlowName": "ADFormazione2021",
-						"FlowDescription": "AD Formazione 2021",
-						"MessageText": "Some text",
-						"MessageNote": "Some note",
-						"MessageCategory": "Error",
-						"MessageSeverity": "Error",
-						"SourceIdentifier": "DF"
+						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@pipeline().RunId\",\n  \"FlowName\": \"ADFormazione2021\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"Some text\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
+						"type": "Expression"
 					}
 				}
 			}
