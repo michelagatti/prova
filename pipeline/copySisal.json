@@ -476,7 +476,7 @@
 						},
 						{
 							"FieldName": "File Name",
-							"FieldValue": "@{activity('copySisal').output.itemName}"
+							"FieldValue": "@{activity('CopyActivity').output.itemName}"
 						},
 						{
 							"FieldName": "resultCode",
