@@ -463,7 +463,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "",
+					"url": "https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C ",
 					"method": "POST",
 					"headers": {
 						"msysfx-app-name": "Microsys.EAI",
