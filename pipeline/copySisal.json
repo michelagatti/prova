@@ -5,7 +5,14 @@
 			{
 				"name": "CopyActivity",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Leggimetadati",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -476,13 +483,36 @@
 						},
 						{
 							"FieldName": "File Name",
-							"FieldValue": "@{activity('CopyActivity').output.itemName}"
+							"FieldValue": "@{activity('Leggimetadati').output.itemName}"
 						},
 						{
 							"FieldName": "resultCode",
 							"FieldValue": "Succeded"
 						}
 					]
+				}
+			},
+			{
+				"name": "Leggimetadati",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "InputExcel",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings"
+					}
 				}
 			}
 		],
