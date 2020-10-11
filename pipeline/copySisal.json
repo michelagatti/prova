@@ -438,7 +438,7 @@
 						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
 					},
 					"body": {
-						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@pipeline().RunId\",\n  \"FlowName\": \"ADFormazione2021\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"Some text\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
+						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@{pipeline().RunId} \",\n  \"FlowName\": \"ADFormazione2021\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"Some text\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
 						"type": "Expression"
 					}
 				}
