@@ -530,6 +530,47 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Notification",
+						"description": "Connect to Microsys Framework for notification",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://api-master-msysfx.azurewebsites.net/api/Notification/Create ",
+							"method": "POST",
+							"headers": {
+								"msysfx-app-name": "Microsys.EAI",
+								"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
+							},
+							"body": {
+								"ApplicationName": "Microsys.EAI",
+								"FlowGroup": "INT_DATAFACTORY",
+								"FlowInstanceId": "string",
+								"FlowName": "ADFormazione2021",
+								"FlowDescription": "AD Formazione 2021",
+								"MessageText": "Some text",
+								"MessageNote": "Some note",
+								"MessageCategory": "Error",
+								"MessageSeverity": "Error",
+								"SourceIdentifier": "DF"
+							}
+						}
 					}
 				],
 				"annotations": []
@@ -796,7 +837,7 @@
 					"sheetName": "Base Dati",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Report Inbound_SisalPay B2C.xlsx",
+						"fileName": "Report Inbound_SisalPay B2C Small.xlsx",
 						"container": "importazione"
 					},
 					"firstRowAsHeader": true
