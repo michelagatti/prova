@@ -431,7 +431,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://api-master-msysfx.azurewebsites.net/api/Notification/Create ",
+					"url": "https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C ",
 					"method": "POST",
 					"headers": {
 						"msysfx-app-name": "Microsys.EAI",
@@ -444,9 +444,16 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "AggiornaBAM",
 				"type": "WebActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Notification",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -461,7 +468,17 @@
 					"headers": {
 						"msysfx-app-name": "Microsys.EAI",
 						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
-					}
+					},
+					"body": [
+						{
+							"FieldName": "instanceId",
+							"FieldValue": "@{pipeline().RunId}"
+						},
+						{
+							"FieldName": "File Name",
+							"FieldValue": "@{YYYYYYY}"
+						}
+					]
 				}
 			}
 		],
