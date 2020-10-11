@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "CopyActivity",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -416,7 +416,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "CopyActivity",
 						"dependencyConditions": [
 							"Completed"
 						]
@@ -438,7 +438,7 @@
 						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
 					},
 					"body": {
-						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@{pipeline().RunId} \",\n  \"FlowName\": \"@{pipeline().Pipeline}\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"Some text\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
+						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@{pipeline().RunId} \",\n  \"FlowName\": \"@{pipeline().Pipeline}\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"@{activity('CopyActivity').Status}\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
 						"type": "Expression"
 					}
 				}
