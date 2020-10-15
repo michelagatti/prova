@@ -1,0 +1,25 @@
+{
+	"name": "EventTriggerSisal",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "copySisal",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/importazione/blobs/",
+			"blobPathEndsWith": "InputToTestEvent.csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/81c292d0-8976-4aa6-8c7c-a15141cda8df/resourceGroups/Formazione2021/providers/Microsoft.Storage/storageAccounts/storageformazione2021",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
