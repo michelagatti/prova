@@ -1207,7 +1207,7 @@
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/importazione/blobs/input",
-					"blobPathEndsWith": "csv",
+					"blobPathEndsWith": ".csv",
 					"ignoreEmptyBlobs": true,
 					"scope": "[parameters('EventTriggerSisal_properties_typeProperties_scope')]",
 					"events": [
