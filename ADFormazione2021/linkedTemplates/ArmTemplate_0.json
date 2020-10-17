@@ -22,6 +22,10 @@
 		"SqlServer1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"EventTriggerSisal_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/81c292d0-8976-4aa6-8c7c-a15141cda8df/resourceGroups/Formazione2021/providers/Microsoft.Storage/storageAccounts/storageformazione2021"
 		}
 	},
 	"variables": {
@@ -500,9 +504,16 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy data1",
+						"name": "CopyActivity",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Leggimetadati",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -915,7 +926,7 @@
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "Copy data1",
+								"activity": "CopyActivity",
 								"dependencyConditions": [
 									"Completed"
 								]
@@ -930,23 +941,87 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"url": "https://api-master-msysfx.azurewebsites.net/api/Notification/Create ",
+							"url": "https://api-master-msysfx.azurewebsites.net/api/Notification/Create",
 							"method": "POST",
 							"headers": {
 								"msysfx-app-name": "Microsys.EAI",
 								"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
 							},
 							"body": {
-								"ApplicationName": "Microsys.EAI",
-								"FlowGroup": "INT_DATAFACTORY",
-								"FlowInstanceId": "string",
-								"FlowName": "ADFormazione2021",
-								"FlowDescription": "AD Formazione 2021",
-								"MessageText": "Some text",
-								"MessageNote": "Some note",
-								"MessageCategory": "Error",
-								"MessageSeverity": "Error",
-								"SourceIdentifier": "DF"
+								"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@{pipeline().RunId} \",\n  \"FlowName\": \"@{pipeline().Pipeline}\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"@{activity('CopyActivity').Status}\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "AggiornaBAM",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Notification",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": " https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"msysfx-app-name": "Microsys.EAI",
+								"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
+							},
+							"body": [
+								{
+									"FieldName": "instanceId",
+									"FieldValue": "@{pipeline().RunId}"
+								},
+								{
+									"FieldName": "File Name",
+									"FieldValue": "@{activity('Leggimetadati').output.itemName}"
+								},
+								{
+									"FieldName": "resultCode",
+									"FieldValue": "Succeded"
+								}
+							]
+						}
+					},
+					{
+						"name": "Leggimetadati",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "InputExcel",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true
 							}
 						}
 					}
@@ -1111,6 +1186,37 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventTriggerSisal')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "copySisal",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/importazione/blobs/input",
+					"blobPathEndsWith": "csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EventTriggerSisal_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/copySisal')]"
 			]
 		},
 		{

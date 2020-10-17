@@ -16,6 +16,9 @@
 		},
 		"SqlServer1_connectionString": {
 			"value": ""
+		},
+		"EventTriggerSisal_properties_typeProperties_scope": {
+			"value": "/subscriptions/81c292d0-8976-4aa6-8c7c-a15141cda8df/resourceGroups/Formazione2021/providers/Microsoft.Storage/storageAccounts/storageformazione2021"
 		}
 	}
 }
