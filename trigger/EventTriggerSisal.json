@@ -9,6 +9,16 @@
 					"referenceName": "copySisal",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "copySisal_WithEventTrigger",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"SourcePath": "@triggerBody().folderPath",
+					"SourceFile": "@triggerBody().fileName"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",

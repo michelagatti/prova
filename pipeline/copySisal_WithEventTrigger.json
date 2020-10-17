@@ -1,0 +1,573 @@
+{
+	"name": "copySisal_WithEventTrigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyActivity",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Leggimetadati",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Mese dell'anno",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Mese",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Giorno della settimana",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GiornoSettimana",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Servizio",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Servizio",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Settimana",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Settimana",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Offerte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Offerte",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Completate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Completate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Servite",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Servite",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Servite e Completate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ServiteCompletate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Servite Subito",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ServiteSubito",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 0-10",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_0_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 10-20",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_10_20",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 20-30",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_20_30",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 30-40",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_30_40",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 40-50",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_40_50",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 50-60",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_50_60",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 60-120",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_60_120",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 120-180",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_120_180",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate 180-240",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_180_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Accodate oltre 240",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Accodate_Oltre_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Completate (abbandonata) in coda",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CompletateAbbandonataInCoda",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 0-10",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_0_10",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 10-20",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_10_20",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 20-30",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_20_30",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 30-40",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_30_40",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 40-50",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_40_50",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 50-60",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_50_60",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 60-120",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_60_120",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 120-180",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_120_180",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Abb. in coda 180-240",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AbbInCoda_180_240",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "InputExcel",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Notification",
+				"description": "Connect to Microsys Framework for notification",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Delete1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://api-master-msysfx.azurewebsites.net/api/Notification/Create",
+					"method": "POST",
+					"headers": {
+						"msysfx-app-name": "Microsys.EAI",
+						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
+					},
+					"body": {
+						"value": "{\n  \"ApplicationName\": \"Microsys.EAI\",\n  \"FlowGroup\": \"INT_DATAFACTORY\",\n  \"FlowInstanceId\": \"@{pipeline().RunId} \",\n  \"FlowName\": \"@{pipeline().Pipeline}\",\n  \"FlowDescription\": \"AD Formazione 2021\",\n  \"MessageText\": \"@{activity('CopyActivity').Status}\",\n  \"MessageNote\": \"Some note\",\n  \"MessageCategory\": \"Error\",\n  \"MessageSeverity\": \"Error\",\n  \"SourceIdentifier\": \"DF\"\n} ",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "AggiornaBAM",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Notification",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": " https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"msysfx-app-name": "Microsys.EAI",
+						"msysfx-secret-key": "YzNCbGNtbGhiVzhnYzJsaElHRmlZbUZ6ZEdGdWVtRWdjMmxqZFhKdg=="
+					},
+					"body": [
+						{
+							"FieldName": "instanceId",
+							"FieldValue": "@{pipeline().RunId}"
+						},
+						{
+							"FieldName": "File Name",
+							"FieldValue": "@{activity('Leggimetadati').output.itemName}"
+						},
+						{
+							"FieldName": "resultCode",
+							"FieldValue": "Succeded"
+						}
+					]
+				}
+			},
+			{
+				"name": "Leggimetadati",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "InputExcel",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"itemName"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true
+					}
+				}
+			},
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CopyActivity",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "InputExcel",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "importazione"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true
+					}
+				}
+			}
+		],
+		"parameters": {
+			"SourcePath": {
+				"type": "string"
+			},
+			"SourceFile": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
