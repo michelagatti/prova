@@ -130,27 +130,189 @@
 				"type": "AzureSqlTable",
 				"schema": [
 					{
-						"name": "campoStringa",
+						"name": "DfReportInboundB2cDetailsId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "DfReportInboundB2cFileId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Mese",
 						"type": "varchar"
 					},
 					{
-						"name": "campoIntero",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "campoFormula",
+						"name": "GiornoSettimana",
 						"type": "varchar"
 					},
 					{
-						"name": "campoNumericoconFormula",
-						"type": "float",
-						"precision": 15
+						"name": "Servizio",
+						"type": "varchar"
+					},
+					{
+						"name": "Giorno",
+						"type": "date"
+					},
+					{
+						"name": "Campagna",
+						"type": "varchar"
+					},
+					{
+						"name": "FasciaOraria",
+						"type": "varchar"
+					},
+					{
+						"name": "NumeroChiamante",
+						"type": "varchar"
+					},
+					{
+						"name": "Settimana",
+						"type": "varchar"
+					},
+					{
+						"name": "Offerte",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Completate",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Servite",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ServiteCompletate",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ServiteSubito",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_0_10",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_10_20",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_20_30",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_30_40",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_40_50",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_50_60",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_60_120",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_120_180",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_180_240",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Accodate_Oltre_240",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CompletateAbbandonataInCoda",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_0_10",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_10_20",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_20_30",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_30_40",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_40_50",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_50_60",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_60_120",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_120_180",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AbbInCoda_180_240",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TempoDiCodaSecs",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TempoDiConversazioneChiamata",
+						"type": "varchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "prova"
+					"table": "DfReportInboundB2cDetails"
 				}
 			},
 			"dependsOn": [
@@ -1887,7 +2049,7 @@
 								"referenceName": "AzureSqlTable1",
 								"type": "DatasetReference"
 							},
-							"script": "sink(input(\n\t\tcampoStringa as string,\n\t\tcampoIntero as short,\n\t\tcampoFormula as string,\n\t\tcampoNumericoconFormula as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
+							"script": "sink(input(\n\t\tDfReportInboundB2cDetailsId as long,\n\t\tDfReportInboundB2cFileId as string,\n\t\tMese as string,\n\t\tGiornoSettimana as string,\n\t\tServizio as string,\n\t\tGiorno as date,\n\t\tCampagna as string,\n\t\tFasciaOraria as string,\n\t\tNumeroChiamante as string,\n\t\tSettimana as string,\n\t\tOfferte as integer,\n\t\tCompletate as integer,\n\t\tServite as integer,\n\t\tServiteCompletate as integer,\n\t\tServiteSubito as integer,\n\t\tAccodate as integer,\n\t\tAccodate_0_10 as integer,\n\t\tAccodate_10_20 as integer,\n\t\tAccodate_20_30 as integer,\n\t\tAccodate_30_40 as integer,\n\t\tAccodate_40_50 as integer,\n\t\tAccodate_50_60 as integer,\n\t\tAccodate_60_120 as integer,\n\t\tAccodate_120_180 as integer,\n\t\tAccodate_180_240 as integer,\n\t\tAccodate_Oltre_240 as integer,\n\t\tCompletateAbbandonataInCoda as integer,\n\t\tAbbInCoda_0_10 as integer,\n\t\tAbbInCoda_10_20 as integer,\n\t\tAbbInCoda_20_30 as integer,\n\t\tAbbInCoda_30_40 as integer,\n\t\tAbbInCoda_40_50 as integer,\n\t\tAbbInCoda_50_60 as integer,\n\t\tAbbInCoda_60_120 as integer,\n\t\tAbbInCoda_120_180 as integer,\n\t\tAbbInCoda_180_240 as integer,\n\t\tTempoDiCodaSecs as integer,\n\t\tTempoDiConversazioneChiamata as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Sink1"
 						}
 					],
 					"script": "section Section1;\r\nshared DelimitedText1 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://storageformazione2021.dfs.core.windows.net/importazione/Report Inbound_SisalPay B2C.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = DelimitedText1\r\nin\r\n  Source;\r\n"
@@ -1958,7 +2120,7 @@
 						}
 					],
 					"transformations": [],
-					"script": "source(output(\n\t\tstringa as string,\n\t\tintero as short,\n\t\tformula as string,\n\t\tfloat as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'provaExcel.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nsource1 sink(input(\n\t\tcampoStringa as string,\n\t\tcampoIntero as short,\n\t\tcampoFormula as string,\n\t\tcampoNumericoconFormula as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tcampoStringa = stringa,\n\t\tcampoIntero = intero,\n\t\tcampoFormula = formula,\n\t\tcampoNumericoconFormula = float\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+					"script": "source(output(\n\t\tstringa as string,\n\t\tintero as short,\n\t\tformula as string,\n\t\tfloat as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tinferDriftedColumnTypes: true,\n\tformat: 'excel',\n\tcontainer: 'importazione',\n\tfileName: 'provaExcel.xlsx',\n\tsheetName: 'Sheet1',\n\tfirstRowAsHeader: true) ~> source1\nsource1 sink(input(\n\t\tDfReportInboundB2cDetailsId as long,\n\t\tDfReportInboundB2cFileId as string,\n\t\tMese as string,\n\t\tGiornoSettimana as string,\n\t\tServizio as string,\n\t\tGiorno as date,\n\t\tCampagna as string,\n\t\tFasciaOraria as string,\n\t\tNumeroChiamante as string,\n\t\tSettimana as string,\n\t\tOfferte as integer,\n\t\tCompletate as integer,\n\t\tServite as integer,\n\t\tServiteCompletate as integer,\n\t\tServiteSubito as integer,\n\t\tAccodate as integer,\n\t\tAccodate_0_10 as integer,\n\t\tAccodate_10_20 as integer,\n\t\tAccodate_20_30 as integer,\n\t\tAccodate_30_40 as integer,\n\t\tAccodate_40_50 as integer,\n\t\tAccodate_50_60 as integer,\n\t\tAccodate_60_120 as integer,\n\t\tAccodate_120_180 as integer,\n\t\tAccodate_180_240 as integer,\n\t\tAccodate_Oltre_240 as integer,\n\t\tCompletateAbbandonataInCoda as integer,\n\t\tAbbInCoda_0_10 as integer,\n\t\tAbbInCoda_10_20 as integer,\n\t\tAbbInCoda_20_30 as integer,\n\t\tAbbInCoda_30_40 as integer,\n\t\tAbbInCoda_40_50 as integer,\n\t\tAbbInCoda_50_60 as integer,\n\t\tAbbInCoda_60_120 as integer,\n\t\tAbbInCoda_120_180 as integer,\n\t\tAbbInCoda_180_240 as integer,\n\t\tTempoDiCodaSecs as integer,\n\t\tTempoDiConversazioneChiamata as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tcampoStringa = stringa,\n\t\tcampoIntero = intero,\n\t\tcampoFormula = formula,\n\t\tcampoNumericoconFormula = float\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 				}
 			},
 			"dependsOn": [
