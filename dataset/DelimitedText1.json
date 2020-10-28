@@ -9,7 +9,9 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileName": "Report Inbound_SisalPay B2C.csv",
+				"fileSystem": "importazione"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
