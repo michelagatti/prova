@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -22,6 +26,18 @@
 		"SqlServer1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageformazione2021.dfs.core.windows.net"
+		},
+		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath": {
+			"type": "string",
+			"defaultValue": "@triggerBody().folderPath"
+		},
+		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
 		},
 		"EventTriggerSisal_properties_typeProperties_scope": {
 			"type": "string",
@@ -57,6 +73,9 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -65,6 +84,15 @@
 					},
 					"SqlServer1_connectionString": {
 						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath": {
+						"value": "[parameters('EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath')]"
+					},
+					"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile": {
+						"value": "[parameters('EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile')]"
 					},
 					"EventTriggerSisal_properties_typeProperties_scope": {
 						"value": "[parameters('EventTriggerSisal_properties_typeProperties_scope')]"
