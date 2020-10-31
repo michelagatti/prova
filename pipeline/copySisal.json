@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Leggimetadati",
+						"activity": "Read Metadati",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -409,7 +409,10 @@
 				"inputs": [
 					{
 						"referenceName": "InputExcel",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+						}
 					}
 				],
 				"outputs": [
@@ -425,7 +428,7 @@
 				"type": "WebActivity",
 				"dependsOn": [
 					{
-						"activity": "Delete1",
+						"activity": "Delete File",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -498,7 +501,7 @@
 				}
 			},
 			{
-				"name": "Leggimetadati",
+				"name": "Read Metadati",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -512,7 +515,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "InputExcel",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+						}
 					},
 					"fieldList": [
 						"itemName"
@@ -524,7 +530,7 @@
 				}
 			},
 			{
-				"name": "Delete1",
+				"name": "Delete File",
 				"type": "Delete",
 				"dependsOn": [
 					{
@@ -545,7 +551,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "InputExcel",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+						}
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
