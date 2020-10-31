@@ -471,7 +471,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": " https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
+						"value": "https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
 						"type": "Expression"
 					},
 					"method": "POST",
