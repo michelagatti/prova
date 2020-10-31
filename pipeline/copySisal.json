@@ -32,7 +32,6 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"preCopyScript": "TRUNCATE TABLE\nDfReportInboundB2cDetails",
-						"sqlWriterStoredProcedureName": "[dbo].[b2cinsertfact]",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
