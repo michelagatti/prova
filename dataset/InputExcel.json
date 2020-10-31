@@ -8,12 +8,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Base Dati",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "Report Inbound_SisalPay B2C Small.xls",
-					"type": "Expression"
-				},
+				"fileName": "Report Inbound_SisalPay B2C Small.xlsx",
 				"container": "importazione"
 			},
 			"firstRowAsHeader": true
