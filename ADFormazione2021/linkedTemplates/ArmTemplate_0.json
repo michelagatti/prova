@@ -1289,7 +1289,10 @@
 								"referenceName": "InputExcel",
 								"type": "DatasetReference",
 								"parameters": {
-									"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+									"nomefile": {
+										"value": "@activity('LeggiMetadati').output",
+										"type": "Expression"
+									}
 								}
 							}
 						],
@@ -1396,7 +1399,7 @@
 								"referenceName": "InputExcel",
 								"type": "DatasetReference",
 								"parameters": {
-									"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+									"nomefile": "Report Inbound_SisalPay B2C Small.xlsx"
 								}
 							},
 							"fieldList": [
