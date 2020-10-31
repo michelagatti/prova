@@ -534,7 +534,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "Stored procedure1",
+						"activity": "Staging on fact",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -571,7 +571,7 @@
 				}
 			},
 			{
-				"name": "Stored procedure1",
+				"name": "Staging on fact",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
@@ -588,7 +588,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[b2cinsertfact]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
