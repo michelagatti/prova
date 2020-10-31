@@ -703,13 +703,22 @@
 					"referenceName": "AzureBlobStorage1",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"nomefile": {
+						"type": "string",
+						"defaultValue": "Report Inbound_SisalPay B2C.xlsx"
+					}
+				},
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
 					"sheetName": "Base Dati",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Report Inbound_SisalPay B2C Small.xlsx",
+						"fileName": {
+							"value": "@dataset().nomefile",
+							"type": "Expression"
+						},
 						"container": "importazione"
 					},
 					"firstRowAsHeader": true
@@ -899,7 +908,9 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink"
+								"type": "AzureSqlSink",
+								"preCopyScript": "TRUNCATE TABLE\nDfReportInboundB2cDetails",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"translator": {
