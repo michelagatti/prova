@@ -12,7 +12,7 @@
 			},
 			{
 				"pipelineReference": {
-					"referenceName": "copySisal_WithEventTrigger",
+					"referenceName": "copySisal_withEventTrigger",
 					"type": "PipelineReference"
 				},
 				"parameters": {
