@@ -30,7 +30,9 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE\nDfReportInboundB2cDetails",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
