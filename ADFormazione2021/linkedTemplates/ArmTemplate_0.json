@@ -885,7 +885,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Leggimetadati",
+								"activity": "Read Metadati",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1288,7 +1288,9 @@
 							{
 								"referenceName": "InputExcel",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+								}
 							}
 						],
 						"outputs": [
@@ -1305,7 +1307,7 @@
 						"type": "WebActivity",
 						"dependsOn": [
 							{
-								"activity": "Delete1",
+								"activity": "Delete File",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1378,7 +1380,7 @@
 						}
 					},
 					{
-						"name": "Leggimetadati",
+						"name": "Read Metadati",
 						"type": "GetMetadata",
 						"dependsOn": [],
 						"policy": {
@@ -1393,7 +1395,9 @@
 							"dataset": {
 								"referenceName": "InputExcel",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+								}
 							},
 							"fieldList": [
 								"itemName"
@@ -1405,13 +1409,13 @@
 						}
 					},
 					{
-						"name": "Delete1",
+						"name": "Delete File",
 						"type": "Delete",
 						"dependsOn": [
 							{
-								"activity": "CopyActivity",
+								"activity": "Staging on fact",
 								"dependencyConditions": [
-									"Completed"
+									"Succeeded"
 								]
 							}
 						],
@@ -1427,7 +1431,9 @@
 							"dataset": {
 								"referenceName": "InputExcel",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"nomefile": "Report Inbound_SisalPay B2C.xlsx"
+								}
 							},
 							"logStorageSettings": {
 								"linkedServiceName": {
@@ -1442,6 +1448,33 @@
 								"recursive": true
 							}
 						}
+					},
+					{
+						"name": "Staging on fact",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "CopyActivity",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[b2cinsertfact]"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureSqlDatabase1",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"annotations": []
@@ -1449,6 +1482,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/InputExcel')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
