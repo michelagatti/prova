@@ -146,7 +146,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Read Metadati",
+								"activity": "LeggiMetadati",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -641,7 +641,7 @@
 						}
 					},
 					{
-						"name": "Read Metadati",
+						"name": "LeggiMetadati",
 						"type": "GetMetadata",
 						"dependsOn": [],
 						"policy": {
@@ -2001,7 +2001,7 @@
 				"parameters": {
 					"nomefile": {
 						"type": "string",
-						"defaultValue": "Report Inbound_SisalPay B2C.xlsx"
+						"defaultValue": "Report Inbound_SisalPay B2C Small.xlsx"
 					}
 				},
 				"annotations": [],
