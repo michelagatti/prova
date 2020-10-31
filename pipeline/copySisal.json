@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Read Metadati",
+						"activity": "LeggiMetadati",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -501,7 +501,7 @@
 				}
 			},
 			{
-				"name": "Read Metadati",
+				"name": "LeggiMetadati",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
