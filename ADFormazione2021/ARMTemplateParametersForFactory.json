@@ -23,10 +23,10 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://storageformazione2021.dfs.core.windows.net"
 		},
-		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath": {
+		"EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourcePath": {
 			"value": "@triggerBody().folderPath"
 		},
-		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile": {
+		"EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourceFile": {
 			"value": "@triggerBody().fileName"
 		},
 		"EventTriggerSisal_properties_typeProperties_scope": {

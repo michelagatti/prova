@@ -31,11 +31,11 @@
 			"type": "string",
 			"defaultValue": "https://storageformazione2021.dfs.core.windows.net"
 		},
-		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath": {
+		"EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourcePath": {
 			"type": "string",
 			"defaultValue": "@triggerBody().folderPath"
 		},
-		"EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile": {
+		"EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourceFile": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
 		},
@@ -1342,7 +1342,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"url": {
-								"value": " https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
+								"value": "https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
 								"type": "Expression"
 							},
 							"method": "POST",
@@ -1442,7 +1442,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/copySisal_WithEventTrigger')]",
+			"name": "[concat(parameters('factoryName'), '/copySisal_withEventTrigger')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1918,7 +1918,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"url": {
-								"value": " https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
+								"value": "https://api-master-msysfx.azurewebsites.net/api/Bam/WriteActivity?activityId=@{pipeline().RunId}&activityName=Report%20Inbound%20B2C",
 								"type": "Expression"
 							},
 							"method": "POST",
@@ -2129,43 +2129,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CopySisal_withPowerQuery')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "WranglingDataFlow1",
-						"type": "ExecuteWranglingDataflow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "WranglingDataFlow1",
-								"type": "DataFlowReference",
-								"datasetParameters": {
-									"DelimitedText1": {},
-									"Sink1": {}
-								}
-							},
-							"staging": {}
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/WranglingDataFlow1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SampleSisalImport')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2253,48 +2216,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EventTriggerSisal')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "copySisal",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
-							"referenceName": "copySisal_WithEventTrigger",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"SourcePath": "[parameters('EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourcePath')]",
-							"SourceFile": "[parameters('EventTriggerSisal_properties_copySisal_WithEventTrigger_parameters_SourceFile')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/importazione/blobs/input",
-					"blobPathEndsWith": ".csv",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('EventTriggerSisal_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/copySisal')]",
-				"[concat(variables('factoryId'), '/pipelines/copySisal_WithEventTrigger')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/copySisal_withDataFlow')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2336,6 +2257,85 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/copySisal_withPowerQuery')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "WranglingDataFlow1",
+						"type": "ExecuteWranglingDataflow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "WranglingDataFlow1",
+								"type": "DataFlowReference",
+								"datasetParameters": {
+									"DelimitedText1": {},
+									"Sink1": {}
+								}
+							},
+							"staging": {}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/WranglingDataFlow1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventTriggerSisal')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "copySisal",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "copySisal_withEventTrigger",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"SourcePath": "[parameters('EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourcePath')]",
+							"SourceFile": "[parameters('EventTriggerSisal_properties_copySisal_withEventTrigger_parameters_SourceFile')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/importazione/blobs/input",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EventTriggerSisal_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/copySisal')]",
+				"[concat(variables('factoryId'), '/pipelines/copySisal_withEventTrigger')]"
 			]
 		},
 		{
