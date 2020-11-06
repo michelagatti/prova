@@ -545,10 +545,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "InputExcel",
-						"type": "DatasetReference",
-						"parameters": {
-							"nomefile": "Report Inbound_SisalPay B2C.xlsx"
-						}
+						"type": "DatasetReference"
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
