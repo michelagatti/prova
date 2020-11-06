@@ -11,7 +11,7 @@
 			"sheetName": "Base Dati",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Report Inbound_SisalPay B2C Small.xlsx",
+				"fileName": "Report Inbound_SisalPay B2C.xlsx",
 				"container": "importazione"
 			},
 			"firstRowAsHeader": true
